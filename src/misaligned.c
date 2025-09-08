@@ -2,6 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
+typedef struct {
+    const char* majorColor;
+    const char* minorColor;
+} ColorPair;
+
 const char* majorColors[] = {"White", "Red", "Black", "Yellow", "Violet"};
 const char* minorColors[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
 
