@@ -37,10 +37,10 @@ struct SensorReadings rainySensorStub() {
 // Custom sensor stub for high precipitation but low wind
 struct SensorReadings highPrecipLowWindStub() {
     struct SensorReadings readings;
-    readings.temperatureInC = 30;
-    readings.precipitation = 70; // above 60
+    readings.temperatureInC = 30;  // > 25
+    readings.precipitation = 70;   // >= 60
     readings.humidity = 85;
-    readings.windSpeedKMPH = 30; // below 50
+    readings.windSpeedKMPH = 30;   // < 50
     return readings;
 }
 
@@ -62,17 +62,18 @@ char* report(struct SensorReadings (*sensorReader)()) {
 }
 
 void testRainy() {
-    char* weather = report(rainySensorStub);
-    printf("%s\n", weather);
-    assert(weather && strstr(weather, "Partly Cloudy") != NULL);
+    char* weather = report(sensorStub);
+    printf("Weather from default stub: %s\n", weather);
+    // Will fail if "rain" is not present in stormy weather report
+    assert(weather && strstr(weather, "rain") != NULL);
     free(weather);
 }
 
 void testHighPrecipitation() {
-    // This stub gives high precipitation (>60) and low wind-speed (<50)
+    // This instance of stub gives high precipitation (>60) and low wind-speed (<50)
     char* weather = report(highPrecipLowWindStub);
-    // strengthen the assert to expose the bug
-    // (function returns Sunny day, it should predict rain)
+    printf("Weather from high precip stub: %s\n", weather);
+    // Will fail because there's no condition handling high precip with low wind
     assert(weather && strstr(weather, "rain") != NULL);
     free(weather);
 }

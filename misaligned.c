@@ -15,13 +15,33 @@ char* formatColorMapEntry(int index, const char* majorColor, const char* minorCo
 
 // Function to test a color map entry format
 int testColorMapEntryFormat() {
-    char* entry = formatColorMapEntry(10, "Red", "Blue");
-    // This will fail because the formatting is misaligned
-    // A proper format would be something like "%2d | %-6s | %-6s"
-    int isCorrectlyFormatted = (strcmp(entry, "10 | Red | Blue") == 0);
-    free(entry);
-    assert(isCorrectlyFormatted);
-    return isCorrectlyFormatted;
+    // Create entries for a single digit number and double digit number
+    char* entry1 = formatColorMapEntry(2, "Red", "Blue");
+    char* entry2 = formatColorMapEntry(10, "Red", "Blue");
+    char* entry3 = formatColorMapEntry(5, "Yellow", "Brown");  // Testing with longer color names
+    
+    // Test alignment requirements:
+    // 1. Numbers should be right-aligned with padding (e.g., "%2d")
+    // 2. Color names should be left-aligned with fixed width (e.g., "%-6s")
+    
+    // Compare with expected properly formatted strings
+    int isCorrectlyFormatted1 = (strcmp(entry1, " 2 | Red     | Blue    ") == 0);
+    int isCorrectlyFormatted2 = (strcmp(entry2, "10 | Red     | Blue    ") == 0);
+    int isCorrectlyFormatted3 = (strcmp(entry3, " 5 | Yellow  | Brown   ") == 0);
+    
+    // Print actual vs expected to help with debugging
+    printf("Expected: ' 2 | Red     | Blue    ', Got: '%s'\n", entry1);
+    printf("Expected: '10 | Red     | Blue    ', Got: '%s'\n", entry2);
+    printf("Expected: ' 5 | Yellow  | Brown   ', Got: '%s'\n", entry3);
+    
+    free(entry1);
+    free(entry2);
+    free(entry3);
+    
+    // This assertion will fail because the format doesn't match the requirements
+    assert(isCorrectlyFormatted1 && isCorrectlyFormatted2 && isCorrectlyFormatted3);
+    
+    return isCorrectlyFormatted1 && isCorrectlyFormatted2 && isCorrectlyFormatted3;
 }
 
 int printColorMap() {
