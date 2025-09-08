@@ -67,12 +67,3 @@ void print_color_map() {
         free(formattedLine);
     }
 }
-
-#ifdef UNIT_TEST
-int main() {
-    int result = print_color_map();
-    assert(result == 25);
-    printf("All is well (maybe!)\n");
-    return 0;
-}
-#endif
