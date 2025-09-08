@@ -65,8 +65,24 @@ int testPrintColorMap() {
     printf("\nPrint color map test\n");
     int formatResult = testColorMapEntryFormat();
     int result = printColorMap();
-    assert(result == 25);
-    assert(formatResult);
-    printf("All is well (maybe!)\n");
-    return 0;
+    
+    int passed = 1;
+    
+    if (result != 25) {
+        printf("ERROR: Expected printColorMap to return 25, but got %d\n", result);
+        passed = 0;
+    }
+    
+    if (!formatResult) {
+        printf("ERROR: Color map entry formatting test failed\n");
+        passed = 0;
+    }
+    
+    if (passed) {
+        printf("All is well (maybe!)\n");
+    } else {
+        printf("FAILED: Color map has alignment issues\n");
+    }
+    
+    return passed;
 }
