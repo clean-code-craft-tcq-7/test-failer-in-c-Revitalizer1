@@ -55,6 +55,8 @@ char* report(struct SensorReadings (*sensorReader)()) {
             weatherStr = "Partly Cloudy";
         } else if (readings.windSpeedKMPH > 50) {
             weatherStr = "Alert, Stormy with heavy rain";
+        } else if (readings.precipitation >= 60) {
+            weatherStr = "Heavy rain expected";
         }
     }
     snprintf(weather, bufsize, "%s", weatherStr);

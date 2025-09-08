@@ -8,7 +8,8 @@ char* formatColorMapEntry(int index, const char* majorColor, const char* minorCo
     // Allocate memory for the string (including null terminator)
     char* entry = (char*)malloc(50);
     if (entry) {
-        sprintf(entry, "%d | %s | %s", index, majorColor, minorColor);
+        // Format with right-aligned numbers and left-aligned color names with consistent spacing
+        sprintf(entry, "%2d | %-7s | %-7s", index, majorColor, minorColor);
     }
     return entry;
 }
