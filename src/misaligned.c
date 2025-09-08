@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "misaligned.h"
 
 const char* majorColors[] = {"White", "Red", "Black", "Yellow", "Violet"};
 const char* minorColors[] = {"Blue", "Orange", "Green", "Brown", "Slate"};
