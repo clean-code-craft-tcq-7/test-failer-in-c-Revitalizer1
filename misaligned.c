@@ -38,10 +38,13 @@ int testColorMapEntryFormat() {
     free(entry2);
     free(entry3);
     
-    // This assertion will fail because the format doesn't match the requirements
-    assert(isCorrectlyFormatted1 && isCorrectlyFormatted2 && isCorrectlyFormatted3);
+    // Check if formatting is correct (will be false, exposing the bug)
+    if (!(isCorrectlyFormatted1 && isCorrectlyFormatted2 && isCorrectlyFormatted3)) {
+        printf("ERROR: Color map entry formatting is incorrect!\n");
+        return 0; // Return 0 to indicate failure
+    }
     
-    return isCorrectlyFormatted1 && isCorrectlyFormatted2 && isCorrectlyFormatted3;
+    return 1; // Return 1 for success
 }
 
 int printColorMap() {

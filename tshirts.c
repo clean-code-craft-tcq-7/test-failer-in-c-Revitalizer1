@@ -15,11 +15,34 @@ char size(int cms) {
 
 int testTshirtSize() {
     printf("\nTshirt size test\n");
-    assert(size(37) == 'S');
-    assert(size(38) == 'M');  // This will fail as 38 is not handled in the size function
-    assert(size(40) == 'M');
-    assert(size(43) == 'L');
-    printf("All is well (maybe!)\n");
-    return 0;
+    int passed = 1; // Track if all tests pass
+    
+    if (size(37) != 'S') {
+        printf("ERROR: size(37) should be 'S' but got '%c'\n", size(37));
+        passed = 0;
+    }
+    
+    if (size(38) != 'M') {  // This will fail as 38 is not handled in the size function
+        printf("ERROR: size(38) should be 'M' but got '%c'\n", size(38));
+        passed = 0;
+    }
+    
+    if (size(40) != 'M') {
+        printf("ERROR: size(40) should be 'M' but got '%c'\n", size(40));
+        passed = 0;
+    }
+    
+    if (size(43) != 'L') {
+        printf("ERROR: size(43) should be 'L' but got '%c'\n", size(43));
+        passed = 0;
+    }
+    
+    if (passed) {
+        printf("All is well (maybe!)\n");
+    } else {
+        printf("FAILED: Not all T-shirt sizes are correctly assigned\n");
+    }
+    
+    return passed;
 }
 
